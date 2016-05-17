@@ -1,0 +1,152 @@
+﻿<script type="text/ng-template" id="picInfo.html">
+    <div data-ng-click="showClips(node)" select="{{node.isSelected}}" class="{{getStyle2(node)}} treenode">
+        <nobr>
+            <div ng-style="getStyle(node)">
+                <span data-ng-click="openFolder(node)" style="z-index:3;"
+                      class="glyphicon"
+                      ng-class="{
+                      'glyphicon-triangle-right'
+                      !(node.nodes)||(node.nodes.length <1) ,
+          'glyphicon-triangle-bottom': node.nodes && node.nodes.length > 0
+        }"><img src="{{getSrc(node)}}" /></span>
+
+                <span style="position: relative;">{{node.name}}</span>
+            </div>
+        </nobr>
+    </div>
+    <ul ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ul>
+</script>
+<div id="myTabContent"  class="tab-content">
+    <div id="divMain" ng-show="flag" >
+        <h2>MainWindow</h2>
+        <div class="divSearch">
+            <span class="searchLabel">起始井号：</span>
+            <input type="text" class="form-control" style="display:inline-block" ng-model="searchmodel.startNo"></input>
+            <span class="searchLabel">敷设年代：</span>
+            <select class="form-control" ng-model="selectYear" ng-options="value for value in searchmodel.year" ng-change="Search()" style="display:inline-block">
+                <!--option ng-repeat="x in searchmodel.year" ng-bind="x"></!--option-->
+            </select>
+            <span class="searchLabel">管段类型：</span>
+            <select class="form-control" ng-model="selectType" ng-options="value for value in searchmodel.type" ng-change="Search()" style="display:inline-block">
+                <!-->option ng-repeat="x in searchmodel.type" ng-bind="x"></!--option-->
+            </select>
+            <button class="btn btn-primary searchLabel" ng-click="Search()">Search</button>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>index</th>
+                <th>录像文件</th>
+                <th>起始井号</th>
+                <th>终止井号</th>
+                <th>管段类型</th>
+                <th>管段材质</th>
+                <th>管段直径</th>
+                <th>管段长度</th>
+                <th>检测方向</th>
+                <th>检测长度</th>
+                <th>检测地点</th>
+                <th>检测日期</th>
+                <th>检测方法</th>
+                <th>编辑删除</th>
+            </tr>
+            <tr ng-repeat="x in datasource" ng-class="{true: 'normal', false: 'over'}[x.IsOverTime]">
+                <td>{{ $index + 1 }}</td>
+                <td ng-bind="x.VideoFile"></td>
+                <td ng-bind="x.StartWellNo"></td>
+                <td ng-bind="x.EndWellNo"></td>
+                <td ng-bind="x.TubulationType"></td>
+                <td ng-bind="x.TubulationMaterial"></td>
+                <td ng-bind="x.TubulationDiameter"></td>
+                <td ng-bind="x.TubulationLength"></td>
+                <td ng-bind="x.DetectionDirect"></td>
+                <td ng-bind="x.DetectionLength"></td>
+                <td ng-bind="x.DetectionAddress"></td>
+                <td ng-bind="x.DetectionTime"></td>
+                <td ng-bind="x.DetectionFun"></td>
+                <td><span class="rowspan glyphicon glyphicon glyphicon-edit" title="编辑" ng-click="Modify(x)"></span><span class="rowspan glyphicon glyphicon-trash" title="删除" ng-click="Delete(x)"></span></td>
+            </tr>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a ng-click="Previous()">
+                        <span>上一页</span>
+                    </a>
+                </li>
+                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}">
+                    <a ng-click="selectPage(page)">{{ page }}</a>
+                </li>
+                <li>
+                    <a ng-click="Next()">
+                        <span>下一页</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="divModify" ng-show="!flag" >
+    <h2>Modify</h2>
+    <div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>录像文件</th>
+                <th>起始井号</th>
+                <th>终止井号</th>
+                <th>敷设年代</th>
+                <th>起始埋深</th>
+                <th>终点埋深</th>
+                <th>管段类型</th>
+                <th>管段材质</th>
+                <th>管段直径</th>
+                <th>管段长度</th>
+                <th>检测方向</th>
+                <th>检测长度</th>
+                <th>检测地点</th>
+                <th>检测日期</th>
+                <th>检测方法</th>
+            </tr>
+            <tr ng-model="modifyoraddmodel.PipingDetectionInfo">
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.VideoFile"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.StartWellNo"></input></td>
+                <td><input class="modifyInput"  ng-model="modifyoraddmodel.PipingDetectionInfo.EndWellNo"></input></td>
+                <td><input class="modifyInput"  ng-model="modifyoraddmodel.PipingDetectionInfo.LayingYear"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.StartPointDepth"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.EndPointDepth"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.TubulationType"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.TubulationMaterial"></input></td>
+                <td ><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.TubulationDiameter"></input></td>
+                <td><input class="modifyInput"  ng-model="modifyoraddmodel.PipingDetectionInfo.TubulationLength"></input></td>
+                <td><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.DetectionDirect"></input></td>
+                <td><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.DetectionLength"></input></td>
+                <td><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.DetectionAddress"></input></td>
+                <td><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.DetectionTime"></input></td>
+                <td><input class="modifyInput" ng-model="modifyoraddmodel.PipingDetectionInfo.DetectionFun"></input></td>
+            </tr>
+        </table>
+        <div class="mapUpload">
+        <span class="searchLabel">选择图纸文件：</span>
+        <input type="file" class="form-control"  accept=".jpeg,.bmp,.jpg,.png,.gif" style="display:inline-block"  ng-model="searchmodel.startNo"></input>
+            <button class="btn btn-danger searchLabel" ng-click="Search()">清空图片</button>
+            <div class="mapArea">
+                </div>
+            </div>
+        <div class="picUpload">
+            <span class="searchLabel">选择图片文件：</span>
+            <input type="file" class="form-control" accept=".jpeg,.bmp,.jpg,.png,.gif" multiple="multiple"  style="display:inline-block" ng-model="searchmodel.startNo"></input>
+            <button class="btn btn-danger searchLabel"  ng-click="Search()">清空图片</button>
+            <div class="picArea">
+                <ul><li  ng-repeat="picInfo in pictures" ng-include="'picInfo.html'"></li></ul>
+            </div>
+            </div>
+        <div class="remark">
+            <span class="searchLabel">备注：</span>
+            <input type="text" class="form-control" style="display:inline-block" ng-model="searchmodel.startNo"></input>
+            <button class="btn btn-primary searchLabel" ng-click="Search()">保存</button>
+            </div>
+        </div>
+    </div>
+ </div>

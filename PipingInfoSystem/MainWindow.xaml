@@ -35,26 +35,25 @@
                 <TextBox Name="startNo" Margin="00,0,0,0" Width="50"  Height="25" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="年代:"/>
-                <ComboBox Name="layingDate" Margin="00,0,0,0" Width="70" Height="25" />
+                <ComboBox Name="layingDate" Margin="00,0,0,0" Width="50" Height="25" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="材质:"/>
-                <ComboBox Name="caizhi" Margin="00,0,0,0" Width="60" Height="25" />
+                <ComboBox Name="caizhi" Margin="00,0,0,0" Width="50" Height="25" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="直径:"/>
-                <ComboBox Name="zhijing" Margin="00,0,0,0" Width="90" Height="25" />
+                <ComboBox Name="zhijing" Margin="00,0,0,0" Width="50" Height="25" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="类型:"/>
-                <ComboBox Name="type" Margin="00,0,0,0" Width="60" Height="25" />
-                <!--
-                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="缺陷代码:"/>
+                <ComboBox Name="type" Margin="00,0,0,0" Width="50" Height="25" />
+
+                <!-- <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示:"/>
                 <ComboBox Name="code" Margin="00,0,0,0" Width="50" Height="25" />
-                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="等级:"/>
+                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="等级:"/>
                 <ComboBox Name="level" Margin="00,0,0,0" Width="50" Height="25" />
                 -->
                 <Button ToolTip="搜索" Click='Search' Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,00,0"   Height="30" Width="30">
                     <Button.Content>
                         <Image Stretch="Fill" Source="/PipingInfoSystem;component/image/query_600px_1181401_easyicon.net.png" />
-
                     </Button.Content>
                 </Button>
                 <Button ToolTip="修改" Click='Modify' Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,00,0"   Height="30" Width="30">
@@ -81,24 +80,35 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <ListView Name="pipingInfoData" Grid.Row="2" Margin="0,0,0,0">
-            <ListView.View>
-                <GridView x:Name="gridView1">
-                    <GridViewColumn Header="录像文件" Width="100" DisplayMemberBinding="{Binding Path=VideoFile}"></GridViewColumn>
-                    <GridViewColumn Header="起始井号" Width="60" DisplayMemberBinding="{Binding Path=StartWellNo}"></GridViewColumn>
-                    <GridViewColumn Header="终止井号" Width="60" DisplayMemberBinding="{Binding Path=EndWellNo}"></GridViewColumn>
-                    <GridViewColumn Header="管段类型"  Width="60" DisplayMemberBinding="{Binding Path=TubulationType}"></GridViewColumn>
-                    <GridViewColumn Header="管段材质"  Width="60" DisplayMemberBinding="{Binding Path=TubulationMaterial}"></GridViewColumn>
-                    <GridViewColumn Header="管段直径"  Width="60" DisplayMemberBinding="{Binding Path=TubulationDiameter}"></GridViewColumn>
-                    <GridViewColumn Header="管段长度"  Width="60" DisplayMemberBinding="{Binding Path=TubulationLength}"></GridViewColumn>
-                    <GridViewColumn Header="检测方向"  Width="60" DisplayMemberBinding="{Binding Path=DetectionDirect}"></GridViewColumn>
-                    <GridViewColumn Header="检测长度"  Width="60" DisplayMemberBinding="{Binding Path=DetectionLength}"></GridViewColumn>
-                    <GridViewColumn Header="检测地点"  Width="150" DisplayMemberBinding="{Binding Path=DetectionAddress}"></GridViewColumn>
-                    <GridViewColumn Header="检测日期"  Width="80" DisplayMemberBinding="{Binding Path=DetectionTime}"></GridViewColumn>
-                    <GridViewColumn Header="检测方法"  Width="80" DisplayMemberBinding="{Binding Path=DetectionFun}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid Name="pipingInfoData" ItemsSource="{Binding }" AlternationCount="2" CanUserAddRows="False" Margin="0" Background="White" AutoGenerateColumns="False"  HorizontalGridLinesBrush="#FFD1CFCF" VerticalGridLinesBrush="Transparent" Grid.Row="2" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox x:Name="cBox_All" ></CheckBox>
+                    </DataGridTemplateColumn.Header>
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=student.IsChecked}"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="录像文件" Width="*" Binding="{Binding Path=VideoFile}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="起始井号" Width="*" Binding="{Binding Path=StartWellNo}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="终止井号" Width="*" Binding="{Binding Path=EndWellNo}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="管段类型" Width="*" Binding="{Binding Path=TubulationType}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="管段材质" Width="*" Binding="{Binding Path=TubulationMaterial}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="管段直径" Width="*" Binding="{Binding Path=TubulationDiameter}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="管段长度" Width="*" Binding="{Binding Path=TubulationLength}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="检测方向" Width="*" Binding="{Binding Path=DetectionDirect}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="检测长度" Width="*" Binding="{Binding Path=DetectionLength}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="检测地点" Width="*" Binding="{Binding Path=DetectionAddress}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="检测日期" Width="*" Binding="{Binding Path=DetectionTime}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="检测方法" Width="*" Binding="{Binding Path=DetectionFun}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="是否过期" Width="*" Binding="{Binding Path=IsOverTime}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
         <Grid Grid.Row="3" Background="#333333">
             <Label  Content="ver 1.0" HorizontalAlignment="Right" FontFamily="Arial" FontSize="18" Foreground="White" Margin="0,0,50,0"/>
         </Grid>

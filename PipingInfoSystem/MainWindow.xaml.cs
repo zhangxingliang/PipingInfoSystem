@@ -84,7 +84,6 @@ namespace PipingInfoSystem
             var t = type.SelectionBoxItem.ToString();
 
             List<PipingDetectionInfo> result = handle.PipingDetectionInfoes.ToList().FindAll(p => p.StartWellNo.Contains(s) && p.LayingYear.Contains(l) && p.TubulationMaterial.Contains(c) && p.TubulationDiameter.Contains(z) && p.TubulationType.Contains(t));
-
             pipingInfoData.ItemsSource = result;
             if (result == null || result.Count == 0)
             {

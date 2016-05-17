@@ -1,10 +1,4 @@
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\PipingInfoSystem.exe.config
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\Style.baml
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\AddInfomation.g.cs
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\MainWindow.g.cs
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\App.g.cs
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem_MarkupCompile.cache
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem_MarkupCompile.lref
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\PipingInfoSystem.exe
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\PipingInfoSystem.pdb
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\EntityFramework.dll
@@ -12,6 +6,14 @@ E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\EntityFramework.SqlServ
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\EntityFramework.xml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\EntityFramework.SqlServer.xml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\Style.baml
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\AddInfomation.g.cs
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\MainWindow.g.cs
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\App.g.cs
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem_MarkupCompile.cache
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem_MarkupCompile.lref
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\App.baml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\AddInfomation.baml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\MainWindow.baml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.g.resources
@@ -19,5 +21,3 @@ E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.Proper
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.csproj.GenerateResource.Cache
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.exe
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.pdb
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\App.baml
-E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.csprojResolveAssemblyReference.cache

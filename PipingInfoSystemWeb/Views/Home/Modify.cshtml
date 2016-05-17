@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Modify";
+}
+
+<h2>Modify</h2>
+<div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>录像文件</th>
+            <th>起始井号</th>
+            <th>终止井号</th>
+            <th>敷设年代</th>
+            <th>起始埋深</th>
+            <th>终点埋深</th>
+            <th>管段类型</th>
+            <th>管段材质</th>
+            <th>管段直径</th>
+            <th>管段长度</th>
+            <th>检测方向</th>
+            <th>检测长度</th>
+            <th>检测地点</th>
+            <th>检测日期</th>
+            <th>检测方法</th>
+        </tr>
+        <tr ng-model="modifyoraddmodel.PipingDetectionInfo">
+            <td ng-bind="a"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.StartWellNo"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.EndWellNo"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.LayingYear"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.StartPointDepth"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.EndPointDepth"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.TubulationType"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.TubulationMaterial"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.TubulationDiameter"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.TubulationLength"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.DetectionDirect"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.DetectionLength"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.DetectionAddress"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.DetectionTime"></td>
+            <td ng-bind="modifyoraddmodel.PipingDetectionInfo.DetectionFun"></td>
+        </tr>
+    </table>
+    
+</div>

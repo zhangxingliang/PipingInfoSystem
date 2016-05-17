@@ -1,0 +1,11 @@
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\BasicService.dll.config
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\BasicService.dll
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\BasicService.pdb
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\EntityFramework.dll
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\EntityFramework.SqlServer.dll
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\EntityFramework.xml
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\EntityFramework.SqlServer.xml
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\MyProject\PipingInfoSystem\BasicService\obj\Debug\BasicService.dll
+E:\MyProject\PipingInfoSystem\BasicService\obj\Debug\BasicService.pdb
