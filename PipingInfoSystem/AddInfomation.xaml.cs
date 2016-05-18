@@ -1,4 +1,4 @@
-﻿using PipingInfoSystem.model;
+﻿using BasicService;
 using PipingInfoSystem.module;
 using System;
 using System.Collections.Generic;
@@ -11,44 +11,42 @@ using System.Windows.Media.Imaging;
 
 namespace PipingInfoSystem
 {
+
     /// <summary>
     /// AddInfomation.xaml 的交互逻辑
     /// </summary>
     public partial class AddInfomation : Window
     {
+        EFService service = EFService.GetClient();
         public AddInfomation()
         {
             InitializeComponent();
         }
         string pipingId = null;
         string keyId = null;
-        public AddInfomation(PipingDetectionInfo detectionInfo)
+        public AddInfomation(string pipingid)
         {
             InitializeComponent();
-
-            pipingId = detectionInfo.PipingID;
-            keyId = detectionInfo.KeyID;
-
-            TextBox1.Text = detectionInfo.VideoFile;
-            TextBox2.Text = detectionInfo.LayingYear;
-            TextBox3.Text = detectionInfo.TubulationType;
-            TextBox4.Text = detectionInfo.DetectionDirect;
-            TextBox5.Text = detectionInfo.DetectionAddress;
-            TextBox6.Text = detectionInfo.StartWellNo;
-            TextBox7.Text = detectionInfo.StartPointDepth;
-            TextBox8.Text = detectionInfo.TubulationMaterial;
-            TextBox9.Text = detectionInfo.TubulationLength;
-            TextBox10.Text = detectionInfo.DetectionFun;
-            TextBox11.Text = detectionInfo.EndWellNo;
-            TextBox12.Text = detectionInfo.EndPointDepth;
-            TextBox13.Text = detectionInfo.TubulationDiameter;
-            TextBox14.Text = detectionInfo.DetectionLength;
-            TextBox15.Text = detectionInfo.DetectionTime;
+            PipingDetailInfo detailInfo = service.GetInfo(MainWindow.loginUser.UserName, pipingid).ext;
+            keyId = detailInfo.PipingDetectionInfo.KeyID;
+            pipingId = pipingid;
+            TextBox1.Text = detailInfo.PipingDetectionInfo.VideoFile;
+            TextBox2.Text = detailInfo.PipingDetectionInfo.LayingYear;
+            TextBox3.Text = detailInfo.PipingDetectionInfo.TubulationType;
+            TextBox4.Text = detailInfo.PipingDetectionInfo.DetectionDirect;
+            TextBox5.Text = detailInfo.PipingDetectionInfo.DetectionAddress;
+            TextBox6.Text = detailInfo.PipingDetectionInfo.StartWellNo;
+            TextBox7.Text = detailInfo.PipingDetectionInfo.StartPointDepth;
+            TextBox8.Text = detailInfo.PipingDetectionInfo.TubulationMaterial;
+            TextBox9.Text = detailInfo.PipingDetectionInfo.TubulationLength;
+            TextBox10.Text = detailInfo.PipingDetectionInfo.DetectionFun;
+            TextBox11.Text = detailInfo.PipingDetectionInfo.EndWellNo;
+            TextBox12.Text = detailInfo.PipingDetectionInfo.EndPointDepth;
+            TextBox13.Text = detailInfo.PipingDetectionInfo.TubulationDiameter;
+            TextBox14.Text = detailInfo.PipingDetectionInfo.DetectionLength;
+            TextBox15.Text = detailInfo.PipingDetectionInfo.DetectionTime;
             //drawing.Text = gcPictInfo.PictureFilePath;
-            DbModel db = new DbModel();
-            List<PipingPictureInfo> picInfo = (from q in db.PipingPictureInfoes
-                                               where q.PipingID == detectionInfo.PipingID
-                                               select q).ToList();
+            List<PipingPictureInfo> picInfo = detailInfo.PipingPictureInfoes;
             PipingPictureInfo gcPic = new PipingPictureInfo();
             foreach (var i in picInfo)
             {
@@ -150,7 +148,7 @@ namespace PipingInfoSystem
         //保存数据到数据库
         private void Save(object sender, RoutedEventArgs e)
         {
-
+            PipingDetailInfo detailInfo = new PipingDetailInfo();
             string pipingID = pipingId ?? string.Format("{0}", DateTime.Now.ToString("yyyyMMddHHmmss"));
 
 
@@ -220,15 +218,14 @@ namespace PipingInfoSystem
             detectionInfo.IsDelete = 0;
             detectionInfo.IsEnable = 1;
             detectionInfo.KeyID = Guid.NewGuid().ToString("N");
-            int result = 0;
+            ResponseMessage result = new ResponseMessage();
 
-            DbModel handle = new DbModel();
 
             if (null != pictInfoList.Find(p => !string.IsNullOrEmpty(p.PictureFilePath)))
             {
                 foreach (var i in pictInfoList)
                 {
-                    handle.PipingPictureInfoes.Add(i);
+                    detailInfo.PipingPictureInfoes.Add(i);
                 }
             }
             else
@@ -237,15 +234,9 @@ namespace PipingInfoSystem
                 return;
             }
 
-            handle.PipingDetectionInfoes.Add(detectionInfo);
-
-            if (pipingId != null)
-            {
-                handle.PipingDetectionInfoes.Remove(handle.PipingDetectionInfoes.ToList().Find(p => p.PipingID == pipingId));
-                handle.PipingPictureInfoes.RemoveRange(handle.PipingPictureInfoes.ToList().FindAll(p => p.PipingID == pipingId));
-            }
-            result = handle.SaveChanges();
-            if (result > 0)
+            detailInfo.PipingDetectionInfo = detectionInfo;   
+            result = service.AddOrModify(detailInfo);
+            if (result.code == "0")
             {
                 System.Windows.Forms.MessageBox.Show(string.Format("数据录入成功！"));
                 this.Close();

@@ -9,3 +9,4 @@ E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\zh-Hans\EntityFramework.res
 E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
 E:\MyProject\PipingInfoSystem\BasicService\obj\Debug\BasicService.dll
 E:\MyProject\PipingInfoSystem\BasicService\obj\Debug\BasicService.pdb
+E:\MyProject\PipingInfoSystem\BasicService\bin\Debug\Microsoft.Office.Interop.Word.dll

@@ -11,5 +11,11 @@ namespace BasicService
         public PipingDetectionInfo PipingDetectionInfo { get; set; }
 
         public List<PipingPictureInfo> PipingPictureInfoes { get; set; }
+
+        public PipingDetailInfo()
+        {
+            PipingPictureInfoes = new List<PipingPictureInfo>();
+            PipingDetectionInfo = new PipingDetectionInfo();
+        }
     }
 }

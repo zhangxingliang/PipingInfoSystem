@@ -21,3 +21,6 @@ E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.Proper
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.csproj.GenerateResource.Cache
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.exe
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.pdb
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem.csprojResolveAssemblyReference.cache
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\BasicService.dll
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\BasicService.pdb

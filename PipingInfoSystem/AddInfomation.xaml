@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PipingInfoSystem"
         mc:Ignorable="d"
-        Title="AddInfomation" WindowStartupLocation="CenterScreen" BorderBrush="#333333" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="600" Width="540">
+        Title="AddInfomation" WindowStartupLocation="CenterScreen" BorderBrush="#222" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="600" Width="540">
     <Grid  >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Grid Background="#333333" Grid.Row="0">
+        <Grid Background="#222" Grid.Row="0">
             <Label Margin="5,0,0,0" Content="录入信息" Foreground="white" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center"/>
             <Button Height="25"  Width="25" Name="close_button" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="0,3,5,5" Click="Close" >
                 <Button.Content>
@@ -134,7 +134,7 @@
                 </Grid>
             </StackPanel>
         </ScrollViewer>
-        <Grid Background="#333333" Grid.Row="2"  >
+        <Grid Background="#222" Grid.Row="2"  >
             <Button ToolTip="保存" Width="40"  Click="Save" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="316,0,0,0" HorizontalAlignment="Left"  Height="40">
                 <Button.Content>
                     <Image Stretch="Fill" Source="/PipingInfoSystem;component/image/Paper_airplane_600px_1181455_easyicon.net.png" />

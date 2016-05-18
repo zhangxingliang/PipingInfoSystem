@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PipingInfoSystem"
         mc:Ignorable="d"
-        Title="管道信息系统" WindowStartupLocation="CenterScreen" BorderBrush="#333333" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="599" Width="979" Loaded="LoadComboBox" >
+        Title="管道信息系统" WindowStartupLocation="CenterScreen" BorderBrush="#222" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="599" Width="979" Loaded="LoadComboBox" >
     <Grid Background="#fff2ff" >
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -13,7 +13,7 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Grid Background="#333333" Grid.Row="0" MouseLeftButtonDown="Drag">
+        <Grid Background="#222" Grid.Row="0" MouseLeftButtonDown="Drag">
             <Label Margin="50,0,0,0" Content="管段信息系统" Foreground="white" FontFamily="Microsoft YaHei" FontSize="22" VerticalAlignment="Center"/>
             <Button VerticalAlignment="Top" Height="30"  Width="30" Name="close_button" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="0,5,5,0" Click="Close" >
                 <Button.Content>
@@ -32,23 +32,22 @@
         <Grid Margin="0,0,0,0" Grid.Row="1" Background="White">
             <StackPanel Orientation="Horizontal">
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="起始井号:"/>
-                <TextBox Name="startNo" Margin="00,0,0,0" Width="50"  Height="25" />
+                <TextBox Name="startNo" Margin="00,0,0,0" Width="70"  Height="25" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="年代:"/>
-                <ComboBox Name="layingDate" Margin="00,0,0,0" Width="50" Height="25" />
+                <ComboBox Name="layingDate" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="材质:"/>
-                <ComboBox Name="caizhi" Margin="00,0,0,0" Width="50" Height="25" />
+                <ComboBox Name="caizhi" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="直径:"/>
-                <ComboBox Name="zhijing" Margin="00,0,0,0" Width="50" Height="25" />
+                <ComboBox Name="zhijing" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" />
 
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="类型:"/>
-                <ComboBox Name="type" Margin="00,0,0,0" Width="50" Height="25" />
+                <ComboBox Name="type" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" />
 
-                <!-- <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示:"/>
-                <ComboBox Name="code" Margin="00,0,0,0" Width="50" Height="25" />
-                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="等级:"/>
+              
+                 <!--Label Margin="10,0,0,0" VerticalAlignment="Center" Content="等级:"/>
                 <ComboBox Name="level" Margin="00,0,0,0" Width="50" Height="25" />
                 -->
                 <Button ToolTip="搜索" Click='Search' Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,00,0"   Height="30" Width="30">
@@ -78,22 +77,16 @@
                         <Image Stretch="Fill" Source="/PipingInfoSystem;component/image/add_600px_1181422_easyicon.net.png" />
                     </Button.Content>
                 </Button>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示过期管段:"/>
+                <CheckBox Name="IsOver" Margin="00,0,0,0" Width="15" Height="15"  VerticalContentAlignment="Center" Click="ShowOnlyOrNot" />
             </StackPanel>
         </Grid>
         <DataGrid Name="pipingInfoData" ItemsSource="{Binding }" AlternationCount="2" CanUserAddRows="False" Margin="0" Background="White" AutoGenerateColumns="False"  HorizontalGridLinesBrush="#FFD1CFCF" VerticalGridLinesBrush="Transparent" Grid.Row="2" >
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
-                        <CheckBox x:Name="cBox_All" ></CheckBox>
-                    </DataGridTemplateColumn.Header>
-
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding Path=student.IsChecked}"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="录像文件" Width="*" Binding="{Binding Path=VideoFile}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="敷设年代" Width="*" Binding="{Binding Path=LayingYear}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="起始埋深" Width="*" Binding="{Binding Path=StartPointDepth}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="终点埋深" Width="*" Binding="{Binding Path=EndPointDepth}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="起始井号" Width="*" Binding="{Binding Path=StartWellNo}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="终止井号" Width="*" Binding="{Binding Path=EndWellNo}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="管段类型" Width="*" Binding="{Binding Path=TubulationType}" IsReadOnly="True"/>
@@ -105,11 +98,11 @@
                 <DataGridTextColumn Header="检测地点" Width="*" Binding="{Binding Path=DetectionAddress}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="检测日期" Width="*" Binding="{Binding Path=DetectionTime}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="检测方法" Width="*" Binding="{Binding Path=DetectionFun}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="是否过期" Width="*" Binding="{Binding Path=IsOverTime}" IsReadOnly="True"/>
+                <!--DataGridTextColumn Header="是否过期" Width="*" Binding="{Binding Path=IsOverTime}" IsReadOnly="True"/-->
             </DataGrid.Columns>
             
         </DataGrid>
-        <Grid Grid.Row="3" Background="#333333">
+        <Grid Grid.Row="3" Background="#222">
             <Label  Content="ver 1.0" HorizontalAlignment="Right" FontFamily="Arial" FontSize="18" Foreground="White" Margin="0,0,50,0"/>
         </Grid>
         <Grid Grid.RowSpan="4" Name="login"  Opacity="0" Panel.ZIndex="-1"  Background="Transparent">
@@ -120,7 +113,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="69"/>
                 </Grid.RowDefinitions>
-                <Grid Background="#333333" Grid.Row="0">
+                <Grid Background="#222" Grid.Row="0">
                     <Label Margin="5,0,0,0" Content="登陆" Foreground="white" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" />
                     <Button Height="25"  Width="25" Name="close_login" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="0,2,5,2" Click="CloseLogin" >
                         <Button.Content>
@@ -158,7 +151,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="72"/>
                     </Grid.RowDefinitions>
-                    <Grid Background="#333333" Grid.Row="0">
+                    <Grid Background="#222" Grid.Row="0">
                         <Label Margin="5,0,0,0" Content="注册账号" Foreground="white" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" />
                         <Button Height="25"  Width="25" Name="closeReg" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="0,2,5,2" Click="CloseReg" >
                             <Button.Content>

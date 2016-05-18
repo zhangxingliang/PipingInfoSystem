@@ -16,7 +16,7 @@ namespace PipingInfoSystemWeb.Controllers
         {
             ResponseMessage<List<PipingInfo>> result = new ResponseMessage<List<PipingInfo>>();
             //验证token
-            result = service.Search(request);
+            result = service.Search(usertoken, request);
             return result;
         }
 

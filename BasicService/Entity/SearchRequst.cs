@@ -10,8 +10,13 @@ namespace BasicService
     {
         public string startNo { get; set; }
         public string year { get; set; }
-       // public string texture { get; set; }
-     //   public string diameter { get; set; }
+        public string texture { get; set; }
+        public string diameter { get; set; }
         public string type { get; set; }
+
+        public SearchRequst()
+        {
+            startNo = year = texture = diameter = type = string.Empty;
+        }
     }
 }
