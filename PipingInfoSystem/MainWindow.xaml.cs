@@ -88,10 +88,11 @@ namespace PipingInfoSystem
 
             ResponseMessage<List<PipingInfo>> result = service.Search(loginUser.UserName, requst);
             pipingInfoData.ItemsSource = result.ext;
-            if(IsOver.IsChecked == true)
+            if (IsOver.IsChecked == true)
             {
                 ShowOnlyOrNot(sender, e);
             }
+            SortResult();
             if (result == null || result.ext.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show(string.Format("数据库无符合条件数据"));
@@ -255,9 +256,9 @@ namespace PipingInfoSystem
             if (result.code == "0")
             {
 
-                    loginUser.UserName = user.username;
-                    loginUser.UserType = 0;
-                    System.Windows.Forms.MessageBox.Show("注册成功，请等待管理员审核");
+                loginUser.UserName = user.username;
+                loginUser.UserType = 0;
+                System.Windows.Forms.MessageBox.Show("注册成功，请等待管理员审核");
             }
             else
             {
@@ -272,7 +273,7 @@ namespace PipingInfoSystem
             string username = UserName.Text.Trim();
             string password = Password.Text.Trim();
             result = service.Login(username, password);
-            if(result.code == "0")
+            if (result.code == "0")
             {
                 loginUser.UserName = username;
                 loginUser.UserType = result.ext.UserType;
@@ -292,16 +293,62 @@ namespace PipingInfoSystem
 
         private void ShowOnlyOrNot(object sender, RoutedEventArgs e)
         {
-            if (IsOver.IsChecked == true)
+            if (pipingInfoData.ItemsSource != null)
             {
-                if (pipingInfoData.ItemsSource != null)
-                { 
-                pipingInfoData.ItemsSource = (pipingInfoData.ItemsSource as List<PipingInfo>).FindAll(p => p.IsOverTime == true);
+                if (IsOver.IsChecked == true)
+                {
+                    pipingInfoData.ItemsSource = (pipingInfoData.ItemsSource as List<PipingInfo>).FindAll(p => p.IsOverTime == true);
+                }
+                else
+                {
+                    Search(sender, e);
                 }
             }
-            else
+        }
+
+        private void Sort(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (pipingInfoData != null)
             {
-                Search(sender, e);
+                SortResult();
+            }
+        }
+        private void SortResult()
+        {
+            switch (sort.SelectedIndex)
+            {
+                case 0:
+                    {
+                        List<PipingInfo> data = pipingInfoData.ItemsSource as List<PipingInfo>;
+                        data.Sort((x, y) => x.LayingYear.CompareTo(y.LayingYear));
+                        pipingInfoData.ItemsSource = null;
+                        pipingInfoData.ItemsSource = data;
+                        break;
+                    }
+                case 1:
+                    {
+                        List<PipingInfo> data = pipingInfoData.ItemsSource as List<PipingInfo>;
+                        data.Sort((x, y) => x.TubulationMaterial.CompareTo(y.TubulationMaterial));
+                        pipingInfoData.ItemsSource = null;
+                        pipingInfoData.ItemsSource = data;
+                        break;
+                    }
+                case 2:
+                    {
+                        List<PipingInfo> data = pipingInfoData.ItemsSource as List<PipingInfo>;
+                        data.Sort((x, y) => x.TubulationDiameter.CompareTo(y.TubulationDiameter));
+                        pipingInfoData.ItemsSource = null;
+                        pipingInfoData.ItemsSource = data;
+                        break;
+                    }
+                case 3:
+                    {
+                        List<PipingInfo> data = pipingInfoData.ItemsSource as List<PipingInfo>;
+                        data.Sort((x, y) => x.TubulationType.CompareTo(y.TubulationType));
+                        pipingInfoData.ItemsSource = null;
+                        pipingInfoData.ItemsSource = data;
+                        break;
+                    }
             }
         }
     }

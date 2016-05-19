@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PipingInfoSystem"
         mc:Ignorable="d"
-        Title="管道信息系统" WindowStartupLocation="CenterScreen" BorderBrush="#222" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="599" Width="979" Loaded="LoadComboBox" >
+        Title="管道信息系统" WindowStartupLocation="CenterScreen" BorderBrush="#222" BorderThickness="1" WindowStyle="None"  AllowsTransparency="True" Height="699" Width="1079" Loaded="LoadComboBox" >
     <Grid Background="#fff2ff" >
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -79,6 +79,13 @@
                 </Button>
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示过期管段:"/>
                 <CheckBox Name="IsOver" Margin="00,0,0,0" Width="15" Height="15"  VerticalContentAlignment="Center" Click="ShowOnlyOrNot" />
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="排序:"/>
+                <ComboBox Name="sort" SelectionChanged="Sort" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" >
+                    <ComboBoxItem IsSelected="True" Content="年代"/>
+                    <ComboBoxItem Content="材质"/>
+                    <ComboBoxItem Content="直径"/>
+                    <ComboBoxItem Content="类型"/>
+                </ComboBox>
             </StackPanel>
         </Grid>
         <DataGrid Name="pipingInfoData" ItemsSource="{Binding }" AlternationCount="2" CanUserAddRows="False" Margin="0" Background="White" AutoGenerateColumns="False"  HorizontalGridLinesBrush="#FFD1CFCF" VerticalGridLinesBrush="Transparent" Grid.Row="2" >

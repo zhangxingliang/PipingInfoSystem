@@ -69,9 +69,61 @@ app.service('mainService', ['$http', 'utilsService', function ($http, utilsServi
         return utilsService.get("/api/main/getinfo", { usertoken: "123", pipingid: id });
     }
 }]);
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ngModel) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            element.bind('change', function(event){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+                //附件预览
+                scope.file = (event.srcElement || event.target).files[0];
+                scope.getFile();
+            });
+        }
+    };
+}]);
+app.factory('fileReader', ["$q", "$log", function ($q, $log) {
+    var onLoad = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.resolve(reader.result);
+            });
+        };
+    };
 
-app.controller("mainCtrl", ['$scope', 'mainService', function ($scope, mainService) {
+    var onError = function (reader, deferred, scope) {
+        return function () {
+            scope.$apply(function () {
+                deferred.reject(reader.result);
+            });
+        };
+    };
+
+    var getReader = function (deferred, scope) {
+        var reader = new FileReader();
+        reader.onload = onLoad(reader, deferred, scope);
+        reader.onerror = onError(reader, deferred, scope);
+        return reader;
+    };
+
+    var readAsDataURL = function (file, scope) {
+        var deferred = $q.defer();
+        var reader = getReader(deferred, scope);
+        reader.readAsDataURL(file);
+        return deferred.promise;
+    };
+
+    return {
+        readAsDataUrl: readAsDataURL
+    };
+}]);
+app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($scope, mainService, fileReader) {
     $scope.datasource = [];
+    $scope.curdatasource = [];
     $scope.pages = [];
     $scope.searchmodel= {
         startNo: '',
@@ -91,7 +143,10 @@ app.controller("mainCtrl", ['$scope', 'mainService', function ($scope, mainServi
     $scope.flag = true;
     $scope.selectType = '';
     $scope.modifyoraddmodel = {};
-    $scope.a ='123';
+    $scope.imageSrc = '';
+    $scope.file = {};
+    $scope.activePage = 1;
+    $scope.pageList = [];
     $scope.Search = function () {
         var req = {
             startNo: $scope.searchrequst.startNo,
@@ -100,6 +155,12 @@ app.controller("mainCtrl", ['$scope', 'mainService', function ($scope, mainServi
         }
         mainService.Search(req).then(function (r) {
             $scope.datasource = r.ext;
+            $scope.pageList = [];
+            $scope.activePage = 1;
+            for (var i = 1; i <= parseInt((r.ext.length+14.9)/15); i++) {
+                $scope.pageList.push(i);
+            }
+            $scope.selectPage(1);
         });
     }
 
@@ -119,5 +180,29 @@ app.controller("mainCtrl", ['$scope', 'mainService', function ($scope, mainServi
             }
         });
         
+    }
+
+    $scope.getFile = function () {
+        fileReader.readAsDataUrl($scope.file, $scope)
+                      .then(function (result) {
+                          $scope.imageSrc = result;
+                      });
+    }
+
+    $scope.Previous = function () {
+        if ($scope.activePage > 1)
+        {
+            $scope.selectPage(--$scope.activePage);
+        }
+    }
+
+    $scope.selectPage = function (page) {
+        $scope.activePage = page;
+        $scope.curdatasource = $scope.datasource.slice(15 * ($scope.activePage - 1), Math.min($scope.datasource.length, 15 * $scope.activePage));
+    }
+    $scope.Next = function () {
+        if ($scope.activePage < $scope.pageList.length) {
+            $scope.selectPage(++$scope.activePage);
+        }
     }
 }]);

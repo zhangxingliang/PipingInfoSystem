@@ -15,6 +15,8 @@ namespace BasicService
             if (data != null) {
                 foreach (var i in data)
                 {
+                    int y;
+                    bool b = int.TryParse(i.LayingYear, out y);
                     result.Add(new PipingInfo() {
                         PipingID = i.PipingID,
                         ID = index,
@@ -27,7 +29,7 @@ namespace BasicService
                         DetectionTime = i.DetectionTime,
                         EndPointDepth = i.EndPointDepth,
                         EndWellNo = i.EndWellNo,
-                        IsOverTime = DateTime.Now.Year - int.Parse(i.LayingYear) > 5 ? true:false,
+                        IsOverTime = (DateTime.Now.Year -  y> 5 ? true:false)&&b,
                         LayingYear = i.LayingYear,
                         StartPointDepth = i.StartPointDepth,
                         StartWellNo = i.StartWellNo,

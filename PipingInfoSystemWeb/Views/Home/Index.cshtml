@@ -1,23 +1,8 @@
 ﻿<script type="text/ng-template" id="picInfo.html">
-    <div data-ng-click="showClips(node)" select="{{node.isSelected}}" class="{{getStyle2(node)}} treenode">
-        <nobr>
-            <div ng-style="getStyle(node)">
-                <span data-ng-click="openFolder(node)" style="z-index:3;"
-                      class="glyphicon"
-                      ng-class="{
-                      'glyphicon-triangle-right'
-                      !(node.nodes)||(node.nodes.length <1) ,
-          'glyphicon-triangle-bottom': node.nodes && node.nodes.length > 0
-        }"><img src="{{getSrc(node)}}" /></span>
-
-                <span style="position: relative;">{{node.name}}</span>
-            </div>
-        </nobr>
+    <div>
+       <img src="{{picInfo.path}}" />
+      <span style="position: relative;">{{picInfo.name}}</span>
     </div>
-    <ul ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
-        </li>
-    </ul>
 </script>
 <div id="myTabContent"  class="tab-content">
     <div id="divMain" ng-show="flag" >
@@ -52,7 +37,7 @@
                 <th>检测方法</th>
                 <th>编辑删除</th>
             </tr>
-            <tr ng-repeat="x in datasource" ng-class="{true: 'normal', false: 'over'}[x.IsOverTime]">
+            <tr ng-repeat="x in curdatasource" ng-class="{true: 'over', false: 'normal'}[x.IsOverTime]">
                 <td>{{ $index + 1 }}</td>
                 <td ng-bind="x.VideoFile"></td>
                 <td ng-bind="x.StartWellNo"></td>
@@ -76,7 +61,7 @@
                         <span>上一页</span>
                     </a>
                 </li>
-                <li ng-repeat="page in pageList" ng-class="{active: isActivePage(page)}">
+                <li ng-repeat="page in pageList" ng-class="{active: activePage == page}">
                     <a ng-click="selectPage(page)">{{ page }}</a>
                 </li>
                 <li>
@@ -129,9 +114,10 @@
         </table>
         <div class="mapUpload">
         <span class="searchLabel">选择图纸文件：</span>
-        <input type="file" class="form-control"  accept=".jpeg,.bmp,.jpg,.png,.gif" style="display:inline-block"  ng-model="searchmodel.startNo"></input>
+        <input type="file" class="form-control"  accept=".jpeg,.bmp,.jpg,.png,.gif" file-model="myFile" style="display:inline-block" ></input>
             <button class="btn btn-danger searchLabel" ng-click="Search()">清空图片</button>
-            <div class="mapArea">
+            <div style="margin-top:10px;">
+                <img  class="mapArea"  src="{{imageSrc}}" />
                 </div>
             </div>
         <div class="picUpload">
