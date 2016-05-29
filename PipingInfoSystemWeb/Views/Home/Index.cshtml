@@ -19,6 +19,7 @@
                 <!-->option ng-repeat="x in searchmodel.type" ng-bind="x"></!--option-->
             </select>
             <button class="btn btn-primary searchLabel" ng-click="Search()">Search</button>
+            <button class="btn btn-primary searchLabel" ng-click="ShowMap()">ShowMap</button>
         </div>
         <table class="table table-bordered">
             <tr>
@@ -72,7 +73,7 @@
             </ul>
         </nav>
     </div>
-    <div id="divModify" ng-show="!flag" >
+    <div id="divModify" ng-show="false" >
     <h2>Modify</h2>
     <div>
 
@@ -135,4 +136,14 @@
             </div>
         </div>
     </div>
- </div>
+    <div id="divModify" ng-show="!flag">
+        <h2>Map</h2>
+        <div id="container"
+             style="position: relative;
+                width:1370px;
+                height:800px;
+                border: 1px solid gray;
+                overflow:hidden;">
+        </div>
+        </div>
+    </div>

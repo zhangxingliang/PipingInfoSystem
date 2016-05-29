@@ -77,7 +77,12 @@
                         <Image Stretch="Fill" Source="/PipingInfoSystem;component/image/add_600px_1181422_easyicon.net.png" />
                     </Button.Content>
                 </Button>
-                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示过期管段:"/>
+                <Button ToolTip="在地图上显示" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}" Margin="00,0,10,0" HorizontalAlignment="Right"  Height="30" Width="30" Click="showMapWindow">
+                    <Button.Content>
+                        <Image Stretch="Fill" Source="/PipingInfoSystem;component/image/photo_600px_1181403_easyicon.net.png" />
+                    </Button.Content>
+                </Button>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="只显示过期:"/>
                 <CheckBox Name="IsOver" Margin="00,0,0,0" Width="15" Height="15"  VerticalContentAlignment="Center" Click="ShowOnlyOrNot" />
                 <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="排序:"/>
                 <ComboBox Name="sort" SelectionChanged="Sort" Margin="00,0,0,0" Width="70" Height="25" VerticalContentAlignment="Center" >

@@ -351,5 +351,11 @@ namespace PipingInfoSystem
                     }
             }
         }
+
+        private void showMapWindow(object sender, RoutedEventArgs e)
+        {
+            List<PipingInfo> list = pipingInfoData.ItemsSource as List<PipingInfo>;
+            new Map(list).ShowDialog();
+        }
     }
 }

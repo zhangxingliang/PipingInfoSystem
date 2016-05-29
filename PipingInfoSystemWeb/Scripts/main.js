@@ -147,6 +147,43 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
     $scope.file = {};
     $scope.activePage = 1;
     $scope.pageList = [];
+    $scope.map = new BMap.Map("container");
+    $scope.map.centerAndZoom("成都", 12);
+    $scope.map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+    $scope.map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+    $scope.map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+    $scope.map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件
+    $scope.map.addControl(new BMap.OverviewMapControl({ isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT }));   //右下角，打开
+
+    $scope.localSearch = new BMap.LocalSearch($scope.map);
+    $scope.localSearch.enableAutoViewport(); //允许自动调节窗体大小
+  
+    $scope.searchByStationName = function(addr) {
+        //$scope.map.clearOverlays();//清空原来的标注
+        var keyword = addr;
+        $scope.localSearch.setSearchCompleteCallback(function (searchResult) {
+            var poi = searchResult.getPoi(0);
+            //document.getElementById("result_").value = poi.point.lng + "," + poi.point.lat;
+            $scope.map.centerAndZoom(poi.point, 12);
+            var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度
+            $scope.map.addOverlay(marker);
+            var content = addr + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+            var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
+            marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+        });
+        $scope.localSearch.search(keyword);
+    }
+
+    $scope.AddMarker = function (lng, lat) {
+        var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注，为要查询的地方对应的经纬度
+        $scope.map.addOverlay(marker);
+        var content ="<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+        var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + 123 + "</p>");
+        marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
+        //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    }
     $scope.Search = function () {
         var req = {
             startNo: $scope.searchrequst.startNo,
@@ -155,6 +192,9 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
         }
         mainService.Search(req).then(function (r) {
             $scope.datasource = r.ext;
+            angular.forEach(r.ext, function (data, index, array) {
+                $scope.searchByStationName(data.DetectionAddress);
+            });
             $scope.pageList = [];
             $scope.activePage = 1;
             for (var i = 1; i <= parseInt((r.ext.length+14.9)/15); i++) {
@@ -162,6 +202,9 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
             }
             $scope.selectPage(1);
         });
+    }
+    $scope.ShowMap = function () {
+        $scope.flag = false;
     }
 
     $scope.Delete = function (row) {
@@ -200,6 +243,7 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
         $scope.activePage = page;
         $scope.curdatasource = $scope.datasource.slice(15 * ($scope.activePage - 1), Math.min($scope.datasource.length, 15 * $scope.activePage));
     }
+
     $scope.Next = function () {
         if ($scope.activePage < $scope.pageList.length) {
             $scope.selectPage(++$scope.activePage);
