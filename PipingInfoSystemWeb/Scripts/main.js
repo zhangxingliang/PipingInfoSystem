@@ -148,7 +148,7 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
     $scope.activePage = 1;
     $scope.pageList = [];
     $scope.map = new BMap.Map("container");
-    $scope.map.centerAndZoom("成都", 12);
+    $scope.map.centerAndZoom("四川", 12);
     $scope.map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
     $scope.map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PipingInfoSystem"
         mc:Ignorable="d"
-        Title="AddInfomation" WindowStartupLocation="CenterScreen" BorderBrush="#222" BorderThickness="1" WindowStyle="ToolWindow"  Height="600" Width="600" >
+        Title="Map" WindowStartupLocation="CenterScreen"   WindowStyle="ThreeDBorderWindow"  Height="600" Width="600" >
     <Grid>
         <WebBrowser Name="mapFrame"   Source="http://localhost:8787/" LoadCompleted="InitMarker" />
     </Grid>

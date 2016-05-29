@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("microsoft.office.interop.word.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("index.html")]
 
 
