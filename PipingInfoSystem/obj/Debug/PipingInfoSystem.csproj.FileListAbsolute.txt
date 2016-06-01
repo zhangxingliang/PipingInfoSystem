@@ -27,3 +27,4 @@ E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\BasicService.pdb
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\Map.g.cs
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\Map.baml
 E:\MyProject\PipingInfoSystem\PipingInfoSystem\bin\Debug\Microsoft.mshtml.dll
+E:\MyProject\PipingInfoSystem\PipingInfoSystem\obj\Debug\PipingInfoSystem_Content.g.cs

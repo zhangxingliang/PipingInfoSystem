@@ -93,7 +93,7 @@
                 </ComboBox>
             </StackPanel>
         </Grid>
-        <DataGrid Name="pipingInfoData" ItemsSource="{Binding }" AlternationCount="2" CanUserAddRows="False" Margin="0" Background="White" AutoGenerateColumns="False"  HorizontalGridLinesBrush="#FFD1CFCF" VerticalGridLinesBrush="Transparent" Grid.Row="2" >
+        <DataGrid MouseDoubleClick="ShowOnePoint" Name="pipingInfoData" ItemsSource="{Binding }" AlternationCount="2" CanUserAddRows="False" Margin="0" Background="White" AutoGenerateColumns="False"  HorizontalGridLinesBrush="#FFD1CFCF" VerticalGridLinesBrush="Transparent" Grid.Row="2" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="录像文件" Width="*" Binding="{Binding Path=VideoFile}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="敷设年代" Width="*" Binding="{Binding Path=LayingYear}" IsReadOnly="True"/>

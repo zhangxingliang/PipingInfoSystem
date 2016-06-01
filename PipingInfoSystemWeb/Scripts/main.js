@@ -168,7 +168,7 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
             $scope.map.centerAndZoom(poi.point, 12);
             var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度
             $scope.map.addOverlay(marker);
-            var content = addr + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+            var content = poi.title  + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
             var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
             marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
             //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
@@ -179,7 +179,7 @@ app.controller("mainCtrl", ['$scope', 'mainService','fileReader', function ($sco
     $scope.AddMarker = function (lng, lat) {
         var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注，为要查询的地方对应的经纬度
         $scope.map.addOverlay(marker);
-        var content ="<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+        var content =poi.title+"<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
         var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + 123 + "</p>");
         marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
         //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画

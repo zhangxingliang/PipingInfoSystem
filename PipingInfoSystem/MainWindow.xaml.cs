@@ -357,5 +357,13 @@ namespace PipingInfoSystem
             List<PipingInfo> list = pipingInfoData.ItemsSource as List<PipingInfo>;
             new Map(list).ShowDialog();
         }
+
+        private void ShowOnePoint(object sender, MouseButtonEventArgs e)
+        {
+            PipingInfo info = pipingInfoData.SelectedItem as PipingInfo;
+            List<PipingInfo> list = new List<PipingInfo>();
+            list.Add(info);
+            new Map(list).ShowDialog();
+        }
     }
 }
